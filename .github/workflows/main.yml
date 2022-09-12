@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-          docker build . --build-arg AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" \
+          docker build --build-arg AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" \
             --build-arg AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
             --build-arg AWS_DEFAULT_REGION="${{ secrets.AWS_DEFAULT_REGION }}" \
             --build-arg AWS_DATABASE_HOST="${{secrets.AWS_DATABASE_HOST}}" \
@@ -33,7 +33,7 @@ jobs:
             --build-arg AWS_DATABASE_TABLE="${{secrets.AWS_DATABASE_TABLE}}"\
             --build-arg AWS_BUCKET_NAME="${{secrets.AWS_BUCKET_NAME}}" \
             --build-arg AWS_BUCKET_HEADER_URL="${{secrets.AWS_BUCKET_HEADER_URL}}" \
-            -t ${{secrets.REGISTRY_LOGIN_SERVER}}/searchdata:${{github.sha}}
+            -t ${{secrets.REGISTRY_LOGIN_SERVER}}/searchdata:${{github.sha}} .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/searchdata:${{ github.sha }}
 
       - name: "Deploy to Azure Container Instances"
