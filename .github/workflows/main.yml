@@ -33,15 +33,15 @@ jobs:
             --build-arg AWS_DATABASE_TABLE="${{secrets.AWS_DATABASE_TABLE}}"\
             --build-arg AWS_BUCKET_NAME="${{secrets.AWS_BUCKET_NAME}}" \
             --build-arg AWS_BUCKET_HEADER_URL="${{secrets.AWS_BUCKET_HEADER_URL}}"
-            -t ${{secrets.REGISTRY_LOGIN_SERVER}}/pressureapp:${{github.sha}}
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/pressureapp:${{ github.sha }}
+            -t ${{secrets.REGISTRY_LOGIN_SERVER}}/searchdata:${{github.sha}}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/searchdata:${{ github.sha }}
 
       - name: "Deploy to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
           resource-group: ${{ secrets.RESOURCE_GROUP }}
           dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/pressureapp:${{ github.sha }}
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/searchdata:${{ github.sha }}
           cpu: 2
           memory: 4
           registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
