@@ -32,7 +32,7 @@ jobs:
             --build-arg AWS_DATABASE_NAME="${{secrets.AWS_DATABASE_NAME}}" \
             --build-arg AWS_DATABASE_TABLE="${{secrets.AWS_DATABASE_TABLE}}"\
             --build-arg AWS_BUCKET_NAME="${{secrets.AWS_BUCKET_NAME}}" \
-            --build-arg AWS_BUCKET_HEADER_URL="${{secrets.AWS_BUCKET_HEADER_URL}}"
+            --build-arg AWS_BUCKET_HEADER_URL="${{secrets.AWS_BUCKET_HEADER_URL}}" \
             -t ${{secrets.REGISTRY_LOGIN_SERVER}}/searchdata:${{github.sha}}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/searchdata:${{ github.sha }}
 
