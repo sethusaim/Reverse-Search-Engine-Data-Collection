@@ -8,6 +8,8 @@ __pycache__/
 
 demotest.sh
 
+demotest.py
+
 # Distribution / packaging
 .Python
 build/
