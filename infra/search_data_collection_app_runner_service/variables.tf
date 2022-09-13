@@ -1,7 +1,3 @@
-
-
-
-
 variable "app_runner_service_name" {
   default = "search_data_collection_apprunner_service"
   type    = string
