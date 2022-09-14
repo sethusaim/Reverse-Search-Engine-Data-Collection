@@ -31,7 +31,7 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: production
+        ECR_REPOSITORY: test
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build --build-arg AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" --build-arg AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}" --build-arg AWS_DEFAULT_REGION="${{ secrets.AWS_DEFAULT_REGION }}" --build-arg AWS_DATABASE_HOST="${{ secrets.AWS_DATABASE_HOST }}" --build-arg AWS_DATABASE_USERNAME="${{ secrets.AWS_DATABASE_USERNAME }}" --build-arg AWS_DATABASE_PASSWORD="${{ secrets.AWS_DATABASE_PASSWORD }}" --build-arg AWS_DATABASE_NAME="${{ secrets.AWS_DATABASE_NAME }}" --build-arg AWS_DATABASE_TABLE="${{ secrets.AWS_DATABASE_TABLE }}" --build-arg AWS_BUCKET_NAME="${{ secrets.AWS_BUCKET_NAME }}" --build-arg AWS_BUCKET_HEADER_URL="${{ secrets.AWS_BUCKET_HEADER_URL }}" -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .  
