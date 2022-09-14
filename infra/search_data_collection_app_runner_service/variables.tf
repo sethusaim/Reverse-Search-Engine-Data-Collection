@@ -4,8 +4,8 @@ variable "app_runner_service_name" {
 }
 
 variable "app_runner_service_port" {
-  default = "8000"
-  type    = string
+  default = 8000
+  type    = number
 }
 
 variable "app_runner_service_image_url" {
@@ -23,14 +23,17 @@ variable "app_runner_service_auto_deployments_enabled" {
   type    = bool
 }
 
-variable "app_runner_service_service_role_name" {
+variable "app_runner_service_role_name" {
   default = "apprunner_service_role"
   type    = string
 }
 
-variable "app_runner_service_role_policy_arn" {
-  default = "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
-  type    = string
+variable "app_runner_service_cpu" {
+  default = 1024
+  type = number
 }
 
-
+variable "app_runner_service_memory" {
+  default = 2048
+  type = number
+}
