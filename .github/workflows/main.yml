@@ -1,7 +1,9 @@
 on:
   push:
     branches:
-    - main
+      - main
+    paths-ignore:
+      - 'README.md'
 
 name: Push Docker Image to Amazon ECR
 
@@ -35,10 +37,13 @@ jobs:
         docker build --build-arg AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}" \
             --build-arg AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
             --build-arg AWS_DEFAULT_REGION="${{ secrets.AWS_DEFAULT_REGION }}" \
-            --build-arg MLFLOW_TRACKING_URI="${{ secrets.MLFLOW_TRACKING_URI }}" \
-            --build-arg MONGODB_URL="${{ secrets.MONGODB_URL }}" \
-            --build-arg MLFLOW_TRACKING_USERNAME="${{ secrets.MLFLOW_TRACKING_USERNAME }}" \
-            --build-arg MLFLOW_TRACKING_PASSWORD="${{ secrets.MLFLOW_TRACKING_PASSWORD }}" \
+            --build-arg AWS_DATABASE_HOST="${{secrets.AWS_DATABASE_HOST}}" \
+            --build-arg AWS_DATABASE_USERNAME="${{secrets.AWS_DATABASE_USERNAME}}" \
+            --build-arg AWS_DATABASE_PASSWORD="${{secrets.AWS_DATABASE_PASSWORD}}" \
+            --build-arg AWS_DATABASE_NAME="${{secrets.AWS_DATABASE_NAME}}" \ 
+            --build-arg AWS_DATABASE_TABLE="${{secrets.AWS_DATABASE_TABLE}}" \
+            --build-arg AWS_BUCKET_NAME="${{secrets.AWS_BUCKET_NAME}}" \
+            --build-arg AWS_BUCKET_HEADER_URL="${{secrets.AWS_BUCKET_HEADER_URL}}" \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
