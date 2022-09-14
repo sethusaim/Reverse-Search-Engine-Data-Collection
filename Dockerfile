@@ -46,6 +46,6 @@ ENV AWS_BUCKET_HEADER_URL $AWS_BUCKET_HEADER_URL
 
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-EXPOSE 8080
+EXPOSE 8000
 
 CMD ["python","app.py"]

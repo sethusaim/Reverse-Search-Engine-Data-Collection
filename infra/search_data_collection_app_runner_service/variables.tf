@@ -4,7 +4,7 @@ variable "app_runner_service_name" {
 }
 
 variable "app_runner_service_port" {
-  default = "8080"
+  default = "8000"
   type    = string
 }
 
