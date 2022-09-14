@@ -10,6 +10,8 @@ demotest.sh
 
 demotest.py
 
+infra/.terraform.lock.hcl
+
 .terraform
 
 # Distribution / packaging
